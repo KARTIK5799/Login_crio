@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -17,30 +19,55 @@ const LoginPage = () => {
       setIsSubmitted(false);
     }
   };
-  return <div>
-    <h1>Login Page</h1>
-    {isSubmitted ?(
-        <div>
-            <p>Welcome, {username}!</p>
-        </div>
-    ):(
-        <form onSubmit={handleSubmit}>
-            {error && <p className="error">{error}</p>}
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username" placeholder="username" value={username} onChange={(e)=>setUsername(e.target.value)} required />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input type="text" id="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} required />
-            </div>
 
-            <div>
-                <button type="submit">Submit</button>
-            </div>
+  return (
+    <div className={styles.form}>
+      <h1>Login Page</h1>
+      {isSubmitted ? (
+        <div>
+          <p className={styles.formLabel}>Welcome, {username}!</p>
+        </div>
+      ) : (
+        <form className={styles.formContainer} onSubmit={handleSubmit}>
+          {error && <p className={styles.error}>{error}</p>}
+          <div>
+            <label className={styles.formLabel} htmlFor="username">
+              Username:
+            </label>
+            <input
+              className={styles.formInput}
+              type="text"
+              id="username"
+              placeholder="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className={styles.formLabel} htmlFor="password">
+              Password:
+            </label>
+            <input
+              className={styles.formInput}
+              type="text"
+              id="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <button className={styles.formButton} type="submit">
+              Submit
+            </button>
+          </div>
         </form>
-    )}
-  </div>;
+      )}
+    </div>
+  );
 };
 
 export default LoginPage;
